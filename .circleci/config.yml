@@ -19,7 +19,7 @@ jobs:
             sudo ./aws/install
             aws --version  # Verify AWS CLI installation
 
-            
+
       - run:
           name: Navigate to frontend folder
           command: cd source/frontend  # Move to frontend folder
@@ -40,3 +40,4 @@ jobs:
             aws configure set aws_access_key_id $ACCESS_KEY
             aws configure set aws_secret_access_key $SECRET_KEY
             aws s3 sync build/ s3://leafeon  # Upload build artifacts to S3
+          working_directory: source/frontend

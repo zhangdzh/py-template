@@ -28,7 +28,7 @@ const App = () => {
             <div className="w-1/2 border rounded-xl p-4 "  style={{backgroundColor:'#CAD9F6'}}> 
               <Comments/>
              </div>
-            <div className="w-1/2 border rounded-xl p-4"> hi </div>
+            <div className="w-1/2 border rounded-xl p-4"> test </div>
           </div>
         </div>
       </div>
