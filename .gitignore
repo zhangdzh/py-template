@@ -13,6 +13,7 @@ source/frontend/node_modules/*
 source/frontend/build/*
 
 .DS_Store
+source/.DS_Store
 
 # Distribution / packaging
 .Python
