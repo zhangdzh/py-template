@@ -4,6 +4,9 @@ jobs:
   build:
     docker:
       - image: cimg/node:18.18.2  # Use Node.js image for building React app
+    
+    environment:
+      CI: "false"
 
     steps:
       - checkout  # Checkout the source code
