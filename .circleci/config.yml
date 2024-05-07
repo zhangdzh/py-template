@@ -13,7 +13,7 @@ jobs:
 
       - run:
           name: Install dependencies
-          command: npm install  # Install dependencies
+          command: npm install --force # Install dependencies
           working_directory: source/frontend
 
       - run:
