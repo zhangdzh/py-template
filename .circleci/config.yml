@@ -14,10 +14,12 @@ jobs:
       - run:
           name: Install dependencies
           command: npm install  # Install dependencies
+          working_directory: source/frontend
 
       - run:
           name: Build
           command: npm run build  # Build the React application
+          working_directory: source/frontend
 
       # - run:
       #     name: Upload to S3
