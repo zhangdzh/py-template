@@ -24,7 +24,9 @@ jobs:
           command: npm run build  # Build the React application
           working_directory: source/frontend
 
-      # - run:
-      #     name: Upload to S3
-      #     command: |
-      #       aws s3 sync build/ s3://leafeon  # Upload build artifacts to S3
+      - run:
+          name: Upload to S3
+          command: |
+            aws configure set aws_access_key_id $ACCESS_KEY
+            aws configure set aws_secret_access_key $SECRET_KEY
+            aws s3 sync build/ s3://leafeon  # Upload build artifacts to S3
