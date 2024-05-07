@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/node:14.17  # Use Node.js image for building React app
+      - image: cimg/node:18.18.2  # Use Node.js image for building React app
 
     steps:
       - checkout  # Checkout the source code
