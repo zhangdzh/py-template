@@ -1,8 +1,8 @@
 import React from 'react'
 
-function CommentBox({author, file, text}) {
+function TaskBox({author, file, text}) {
   return (
-    <div className='w-full  border  rounded-xl mt-4' style={{backgroundColor:'#EEF2FC'}}>
+    <div className='w-full  border  rounded-xl mt-4' style={{backgroundColor:'#FFF6EB'}}>
         <div className="flex justify-between px-4 pt-4">
             <div className=' flex gap-2'>
                <h1 className='font-light'> Author:</h1> 
@@ -20,4 +20,4 @@ function CommentBox({author, file, text}) {
   )
 }
 
-export default CommentBox
+export default TaskBox

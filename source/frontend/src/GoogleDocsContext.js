@@ -12,7 +12,15 @@ export const useGoogleDocs = () => {
 
 export const GoogleDocsProvider = ({ children }) => {
   const [comments, setComments] = useState([]);
+  const [tasks, setTasks] = useState([]);
   const [accessToken, setAccessToken] = useState('');
+
+  const moveCommentToTasks = (commentIndex) => {
+    const updatedComments = [...comments];
+    const movedComment = updatedComments.splice(commentIndex, 1)[0];
+    setComments(updatedComments);
+    setTasks(prevTasks => [...prevTasks, movedComment]);
+  };
 
   const loadComments = (accessToken) => {
     let allComments = []; // Accumulate comments in this array
@@ -88,7 +96,7 @@ export const GoogleDocsProvider = ({ children }) => {
   }, []);
 
   return (
-    <GoogleDocsContext.Provider value={{ comments, accessToken }}>
+    <GoogleDocsContext.Provider value={{ comments, accessToken, moveCommentToTasks }}>
       {children}
     </GoogleDocsContext.Provider>
   );
