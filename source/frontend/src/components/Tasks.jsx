@@ -1,5 +1,5 @@
 import React from 'react'
-import TaskBox from './TaskBox';
+import TaskBox from './Taskbox';
 import { useGoogleDocs } from '../GoogleDocsContext';
 
 function Tasks() {
