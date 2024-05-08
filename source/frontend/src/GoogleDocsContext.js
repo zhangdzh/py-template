@@ -96,7 +96,7 @@ export const GoogleDocsProvider = ({ children }) => {
   }, []);
 
   return (
-    <GoogleDocsContext.Provider value={{ comments, accessToken, moveCommentToTasks }}>
+    <GoogleDocsContext.Provider value={{ comments, accessToken, tasks, moveCommentToTasks }}>
       {children}
     </GoogleDocsContext.Provider>
   );
