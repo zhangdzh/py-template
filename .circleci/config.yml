@@ -44,8 +44,8 @@ jobs:
           name: Deploy backend to Heroku
           command: |
             curl https://cli-assets.heroku.com/install.sh | sh
-            echo "machine api.heroku.com\n  login $HEROKU_API_KEY" > ~/.netrc
-            heroku git:remote -a $HEROKU_APP_NAME
+            heroku login -i $HEROKU_API_KEY
+            git remote add heroku https://git.heroku.com/leafeon-test.git
             git push heroku main
 
   frontend:
