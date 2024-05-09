@@ -17,6 +17,39 @@ CORS(app)  # Apply CORS to your Flask app
 # CLIENT_ID = 'your_client_id'
 # CLIENT_SECRET = 'your_client_secret'
 
+# Function to detect user tags
+def is_user_tagged(comment, username):
+    pattern = f"@{re.escape(username)}\\b"
+    if re.search(pattern, comment):
+        return True
+    else:
+        return False
+
+# Function to detect email tags
+def is_email_tagged(comment, email):
+    pattern = f"{re.escape(email)}"
+    if re.search(pattern, comment):
+        return True
+    else:
+        return False
+
+# Function to filter comments
+def filter_comments(comments, username=None, keyword=None):
+    filtered_comments = []
+    for comment in comments:
+        include_comment = True
+        if username:
+            pattern = f"@{re.escape(username)}\\b"
+            if not re.search(pattern, comment):
+                include_comment = False
+        if keyword:
+            if keyword.lower() not in comment.lower():
+                include_comment = False
+        if include_comment:
+            filtered_comments.append(comment)
+    return filtered_comments
+
+
 @app.route('/api/comments')
 def get_comments():
     access_token = request.args.get('access_token')
