@@ -44,13 +44,9 @@ jobs:
           name: Deploy backend to Heroku
           command: |
             curl https://cli-assets.heroku.com/install.sh | sh
-            heroku login -i 9728dd2e-81d1-4928-be73-55ac7e0b69d6
+            heroku login -i HRKU-bdd37d4e-f60a-4bde-960a-195336b953d2
             git remote add heroku https://git.heroku.com/leafeon-test.git
-            git checkout main  # Ensure we're on the main branch
-            git reset --hard origin/main  # Reset any local changes
-            git rm -r --cached source/frontend  # Remove frontend files from git tracking
-            git commit -m "Exclude frontend files from Heroku deployment"
-            git push heroku main:main
+            git push heroku main
 
   frontend:
     docker:
