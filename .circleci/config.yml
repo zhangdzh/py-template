@@ -39,6 +39,15 @@ jobs:
           name: Apply backend Black formatting
           command: pdm run black .
 
+      # Deploy backend to Heroku
+      - run:
+          name: Deploy backend to Heroku
+          command: |
+            curl https://cli-assets.heroku.com/install.sh | sh
+            echo "machine api.heroku.com\n  login $HEROKU_API_KEY" > ~/.netrc
+            heroku git:remote -a $HEROKU_APP_NAME
+            git push heroku main
+
   frontend:
     docker:
       - image: cimg/node:18.18.2  # Use Node.js image for frontend
