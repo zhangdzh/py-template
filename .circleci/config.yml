@@ -50,7 +50,7 @@ jobs:
 
   frontend:
     docker:
-      - image: cimg/node:18.18.2  # Use Node.js image for frontend
+      - image: cimg/node:18.18.2  
     
     environment:
       CI: "false"
