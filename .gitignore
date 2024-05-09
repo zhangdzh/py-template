@@ -11,7 +11,7 @@ source/frontend/node_modules/*
 
 # production
 source/frontend/build/*
-source/frontend
+source/frontend/*
 
 .DS_Store
 source/.DS_Store
