@@ -44,7 +44,7 @@ jobs:
           name: Deploy backend to Heroku
           command: |
             curl https://cli-assets.heroku.com/install.sh | sh
-            heroku login -i HRKU-bdd37d4e-f60a-4bde-960a-195336b953d2
+            heroku login -i $HEROKU_API_KEY
             git remote add heroku https://git.heroku.com/leafeon-test.git
             git push heroku main
 
