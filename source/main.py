@@ -7,6 +7,7 @@
 
 from flask import Flask, request, jsonify
 import requests
+import re
 from flask_cors import CORS  # Import CORS from flask_cors module
 
 
@@ -34,28 +35,33 @@ def is_email_tagged(comment, email):
         return False
 
 # Function to filter comments
-def filter_comments(comments, username=None, keyword=None):
+def filter_comments(comments, username=None, keyword=None, email=None):
     filtered_comments = []
     for comment in comments:
         include_comment = True
         if username:
-            pattern = f"@{re.escape(username)}\\b"
-            if not re.search(pattern, comment):
+            if not is_user_tagged(comment, username):
                 include_comment = False
         if keyword:
             if keyword.lower() not in comment.lower():
+                include_comment = False
+        if email:
+            if not is_email_tagged(comment, email):
                 include_comment = False
         if include_comment:
             filtered_comments.append(comment)
     return filtered_comments
 
-
 @app.route('/api/comments')
 def get_comments():
     access_token = request.args.get('access_token')
+    username = request.args.get('username')  # Get the username from the query parameters
+    keyword = request.args.get('keyword')  # Get the keyword from the query parameters
+    email = request.args.get('email')  # Get the email from the query parameters
+
     if not access_token:
         return jsonify({'error': 'Access token is required'}), 400
-    
+
     try:
         # Fetch comments from Google Drive API
         headers = {'Authorization': f'Bearer {access_token}'}
@@ -75,8 +81,16 @@ def get_comments():
                     'author': comment['author']['displayName'],
                     'fileName': file['name']
                 } for comment in comments_data['items']])
-        
-        return jsonify({'comments': comments}), 200
+
+        # Filter comments based on username, keyword, and email
+        filtered_comments = filter_comments(
+            [comment['content'] for comment in comments],
+            username=username,
+            keyword=keyword,
+            email=email
+        )
+
+        return jsonify({'comments': filtered_comments}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
